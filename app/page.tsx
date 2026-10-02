@@ -60,7 +60,34 @@ export default function BerandaPage() {
   return (
     <>
       <Hero />
+
+      {/* ─── Stats strip — tepat di bawah hero ─── */}
+      <div className="bg-primary-dark">
+        <div className="container-site">
+          <div className="grid grid-cols-2 divide-x divide-white/10 border-t border-white/10 sm:grid-cols-4">
+            {[
+              { value: "500+", label: "Jamaah Berangkat" },
+              { value: "4",    label: "Pilihan Paket" },
+              { value: "24/7", label: "Layanan Admin" },
+              { value: "100%", label: "Kepuasan Jamaah" },
+            ].map(({ value, label }) => (
+              <div
+                key={label}
+                className="flex flex-col items-center gap-0.5 px-4 py-5 text-center"
+              >
+                <span className="font-display text-2xl font-bold text-gold-light sm:text-3xl">
+                  {value}
+                </span>
+                <span className="text-xs font-medium text-white/60">{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ─── Ticker — langsung di bawah stats ─── */}
       <Ticker />
+
       <WhyChooseUs />
 
       {/* ─── Galeri & Momen ────────────────────────── */}

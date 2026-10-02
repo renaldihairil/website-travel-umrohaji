@@ -15,7 +15,7 @@ function Group() {
       {ITEMS.map((item) => (
         <span
           key={item}
-          className="px-6 text-sm font-semibold tracking-wide text-white/85"
+          className="px-6 text-sm font-bold tracking-wide text-primary-dark"
         >
           {item}
         </span>
@@ -26,8 +26,11 @@ function Group() {
 
 export function Ticker() {
   return (
-    <div className="mt-6 overflow-hidden bg-gradient-to-r from-primary-dark via-primary to-primary-dark lg:mt-8">
-      <div className="marquee-track py-3" aria-hidden="true">
+    <div
+      className="overflow-hidden"
+      style={{ backgroundColor: "#D99A28" }}
+    >
+      <div className="marquee-track py-3.5" aria-hidden="true">
         <Group />
         <Group />
         <Group />
