@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #064f46;
+  --color-primary-dark: #043c36;
+  --color-primary-light: #0a6559;
+  --color-gold: #d99a28;
+  --color-gold-light: #f2c96b;
+  --color-gold-soft: #fdf6e7;
+  --color-background: #f7f8f5;
+  --color-white: #ffffff;
+  --color-ink: #123c38;
+  --color-muted: #687774;
+  --color-line: #e5e9e6;
+
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    color: var(--color-primary-dark);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+.container-site {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .container-site {
+    padding-inline: 2rem;
+  }
+}
+
+.eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: 1.25rem;
+  box-shadow: 0 10px 30px -18px rgba(6, 79, 70, 0.35);
+}
+
+/* Anak grid harus bisa menyusut agar tidak menimbulkan overflow horizontal di mobile */
+.grid > * {
+  min-width: 0;
+}

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Deretan kubah emas masjid">
+  <defs>
+    <linearGradient id="dSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8fc3d6"/>
+      <stop offset="1" stop-color="#f4e7c5"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#dSky)"/>
+  <rect y="440" width="800" height="160" fill="#e3d5ae"/>
+  <g fill="#f6efdd">
+    <rect x="120" y="330" width="560" height="110"/>
+    <rect x="60" y="260" width="26" height="180"/>
+    <rect x="714" y="260" width="26" height="180"/>
+  </g>
+  <g fill="#d9a63a">
+    <ellipse cx="260" cy="330" rx="66" ry="52"/>
+    <ellipse cx="400" cy="310" rx="82" ry="64"/>
+    <ellipse cx="545" cy="330" rx="66" ry="52"/>
+    <path d="M176 260h54l-27-30z"/>
+    <path d="M676 260h54l-27-30z"/>
+    <path d="M394 240l6-26 6 26z"/>
+  </g>
+  <g fill="#c98f24" opacity=".8">
+    <ellipse cx="400" cy="318" rx="82" ry="26"/>
+    <ellipse cx="260" cy="338" rx="66" ry="20"/>
+    <ellipse cx="545" cy="338" rx="66" ry="20"/>
+  </g>
+  <g fill="#d9c9a0">
+    <rect x="180" y="372" width="36" height="68"/>
+    <rect x="270" y="372" width="36" height="68"/>
+    <rect x="360" y="372" width="36" height="68"/>
+    <rect x="450" y="372" width="36" height="68"/>
+    <rect x="540" y="372" width="36" height="68"/>
+  </g>
+</svg>

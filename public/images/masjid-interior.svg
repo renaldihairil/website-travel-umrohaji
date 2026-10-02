@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Interior area masjid dengan deretan lengkung">
+  <defs>
+    <linearGradient id="iBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7f1e3"/>
+      <stop offset="1" stop-color="#e6dcc6"/>
+    </linearGradient>
+    <pattern id="iArch" width="160" height="320" patternUnits="userSpaceOnUse">
+      <path d="M20 320V150a60 60 0 0 1 120 0v170z" fill="#d9cba6"/>
+      <path d="M40 320V155a40 40 0 0 1 80 0v165z" fill="#f4eedd"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#iBg)"/>
+  <rect x="0" y="60" width="800" height="40" fill="#0a6559"/>
+  <rect x="0" y="100" width="800" height="300" fill="url(#iArch)"/>
+  <rect y="400" width="800" height="40" fill="#d9a63a" opacity=".7"/>
+  <rect y="440" width="800" height="160" fill="#efe6cf"/>
+  <g stroke="#d9cba6" stroke-width="3">
+    <path d="M0 480h800M0 530h800M120 440v160M320 440v160M520 440v160M720 440v160"/>
+  </g>
+  <g fill="#0a6559" opacity=".8">
+    <path d="M60 200h20v120H60zM240 200h20v120h-20zM420 200h20v120h-20zM600 200h20v120h-20z"/>
+  </g>
+</svg>
