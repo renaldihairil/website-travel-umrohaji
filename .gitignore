@@ -21,6 +21,9 @@ yarn-error.log*
 # freebuff workspace metadata
 .freebuff/
 
+# master foto asli (di-optimasi ke WebP oleh scripts/build-images.mjs)
+/assets/original/
+
 # env files
 .env
 .env*.local

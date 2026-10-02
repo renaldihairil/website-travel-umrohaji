@@ -16,9 +16,10 @@ export function PackageGallery({ images: gallery, name }: PackageGalleryProps) {
       <div className="overflow-hidden rounded-3xl border border-line bg-white">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
+          key={active}
           src={current.src}
           alt={current.alt}
-          className="aspect-[4/3] w-full object-cover"
+          className="animate-pop-in aspect-[4/3] w-full object-cover"
           width={800}
           height={600}
         />

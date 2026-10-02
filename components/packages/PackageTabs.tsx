@@ -61,10 +61,10 @@ export function PackageTabs({ pkg }: { pkg: Package }) {
             aria-controls={`panel-${id}`}
             tabIndex={active === id ? 0 : -1}
             onClick={() => setActive(id)}
-            className={`inline-flex shrink-0 items-center gap-2 border-b-2 px-4 py-3 text-sm font-semibold transition-colors ${
+            className={`inline-flex shrink-0 items-center gap-2 border-b-2 px-4 py-3 text-sm font-semibold transition-all duration-300 hover:text-primary ${
               active === id
                 ? "border-gold text-primary-dark"
-                : "border-transparent text-muted hover:text-primary"
+                : "border-transparent text-muted"
             }`}
           >
             <Icon size={16} aria-hidden="true" />
@@ -74,11 +74,12 @@ export function PackageTabs({ pkg }: { pkg: Package }) {
       </div>
 
       <div
+        key={active}
         role="tabpanel"
         id={`panel-${active}`}
         aria-labelledby={`tab-${active}`}
         tabIndex={0}
-        className="pt-6 text-sm leading-relaxed text-ink/85 sm:text-base"
+        className="animate-fade-up pt-6 text-sm leading-relaxed text-ink/85 sm:text-base"
       >
         {active === "deskripsi" ? <p>{pkg.description}</p> : null}
 

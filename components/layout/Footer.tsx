@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MessageCircle, Mail, MapPin, Phone } from "lucide-react";
+import { MessageCircle, Mail, MapPin, Phone, ArrowRight } from "lucide-react";
 import {
   CONTACT,
   NAV_ITEMS,
@@ -9,70 +9,110 @@ import {
 import { images } from "@/lib/images";
 import { whatsappUrl } from "@/lib/whatsapp";
 
+const PAKET_LINKS = [
+  { href: "/paket-umroh/umroh-reguler",    label: "Umroh Reguler" },
+  { href: "/paket-umroh/umroh-plus-turki", label: "Umroh Plus Turki" },
+  { href: "/paket-umroh/umroh-vip",        label: "Umroh VIP" },
+  { href: "/paket-umroh/umroh-private",    label: "Umroh Private" },
+];
+
 export function Footer() {
   return (
     <footer className="bg-primary-dark text-white">
-      <div className="container-site grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4">
+      {/* Main grid */}
+      <div className="container-site grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1.4fr]">
+
+        {/* Kolom 1 — Branding */}
         <div>
-          <div className="flex items-center gap-3">
+          <span className="inline-flex rounded-2xl bg-white/10 p-2.5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={images.logo}
-              alt="Logo Nurul Iman Travel & Haji"
-              width={44}
-              height={44}
-              className="h-11 w-11 rounded-xl"
+              alt="Nurul Iman Travel Umroh & Haji"
+              width={110}
+              height={45}
+              className="h-10 w-auto"
             />
-            <span className="leading-tight">
-              <span className="block font-display text-xl font-bold">
-                Nurul Iman
-              </span>
-              <span className="block text-[11px] tracking-wide text-white/70">
-                Travel Umroh &amp; Haji
-              </span>
-            </span>
-          </div>
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/70">
-            Wujudkan perjalanan umroh yang nyaman dan berkah bersama pembimbing
-            berpengalaman dan layanan profesional.
+          </span>
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/65">
+            {SITE.description}
           </p>
+          {/* WA CTA kecil */}
+          <a
+            href={whatsappUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/8 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:border-gold/50 hover:bg-gold/10 hover:text-gold-light"
+          >
+            <MessageCircle size={15} aria-hidden="true" />
+            {WHATSAPP_DISPLAY}
+          </a>
         </div>
 
+        {/* Kolom 2 — Navigasi */}
         <nav aria-label="Navigasi footer">
-          <h2 className="text-base font-semibold">Navigasi</h2>
-          <ul className="mt-4 space-y-2.5 text-sm text-white/70">
-            {NAV_ITEMS.map((item) => (
+          <h2 className="mb-5 text-sm font-bold uppercase tracking-widest text-white/40">
+            Navigasi
+          </h2>
+          <ul className="space-y-2.5">
+            {[...NAV_ITEMS, { href: "/pendaftaran", label: "Pendaftaran" }].map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="transition-colors hover:text-gold-light"
+                  className="group flex items-center gap-1.5 text-sm text-white/65 transition-colors hover:text-gold-light"
                 >
+                  <ArrowRight
+                    size={12}
+                    aria-hidden="true"
+                    className="opacity-0 -translate-x-1 transition-all group-hover:opacity-100 group-hover:translate-x-0"
+                  />
                   {item.label}
                 </Link>
               </li>
             ))}
-            <li>
-              <Link
-                href="/pendaftaran"
-                className="transition-colors hover:text-gold-light"
-              >
-                Pendaftaran
-              </Link>
-            </li>
           </ul>
         </nav>
 
+        {/* Kolom 3 — Paket */}
+        <nav aria-label="Paket umroh">
+          <h2 className="mb-5 text-sm font-bold uppercase tracking-widest text-white/40">
+            Paket Umroh
+          </h2>
+          <ul className="space-y-2.5">
+            {PAKET_LINKS.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="group flex items-center gap-1.5 text-sm text-white/65 transition-colors hover:text-gold-light"
+                >
+                  <ArrowRight
+                    size={12}
+                    aria-hidden="true"
+                    className="opacity-0 -translate-x-1 transition-all group-hover:opacity-100 group-hover:translate-x-0"
+                  />
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Kolom 4 — Kontak & CTA */}
         <div>
-          <h2 className="text-base font-semibold">Kontak</h2>
-          <ul className="mt-4 space-y-3 text-sm text-white/70">
+          <h2 className="mb-5 text-sm font-bold uppercase tracking-widest text-white/40">
+            Kontak Kami
+          </h2>
+          <ul className="space-y-3">
             <li>
               <a
                 href={whatsappUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 transition-colors hover:text-gold-light"
+                className="flex items-center gap-3 text-sm text-white/65 transition-colors hover:text-gold-light"
               >
-                <MessageCircle size={16} aria-hidden="true" />
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/10">
+                  <MessageCircle size={14} aria-hidden="true" />
+                </span>
                 WhatsApp {WHATSAPP_DISPLAY}
               </a>
             </li>
@@ -80,9 +120,11 @@ export function Footer() {
               <li>
                 <a
                   href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}
-                  className="flex items-center gap-2.5 transition-colors hover:text-gold-light"
+                  className="flex items-center gap-3 text-sm text-white/65 transition-colors hover:text-gold-light"
                 >
-                  <Phone size={16} aria-hidden="true" />
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/10">
+                    <Phone size={14} aria-hidden="true" />
+                  </span>
                   {CONTACT.phone}
                 </a>
               </li>
@@ -91,44 +133,48 @@ export function Footer() {
               <li>
                 <a
                   href={`mailto:${CONTACT.email}`}
-                  className="flex items-center gap-2.5 transition-colors hover:text-gold-light"
+                  className="flex items-center gap-3 text-sm text-white/65 transition-colors hover:text-gold-light"
                 >
-                  <Mail size={16} aria-hidden="true" />
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/10">
+                    <Mail size={14} aria-hidden="true" />
+                  </span>
                   {CONTACT.email}
                 </a>
               </li>
             ) : null}
             {CONTACT.address ? (
-              <li className="flex items-start gap-2.5">
-                <MapPin size={16} className="mt-0.5 shrink-0" aria-hidden="true" />
-                <span>{CONTACT.address}</span>
+              <li className="flex items-start gap-3 text-sm text-white/65">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/10">
+                  <MapPin size={14} className="mt-0.5" aria-hidden="true" />
+                </span>
+                {CONTACT.address}
               </li>
             ) : null}
           </ul>
-        </div>
 
-        <div>
-          <h2 className="text-base font-semibold">Siap Berangkat?</h2>
-          <p className="mt-4 text-sm leading-relaxed text-white/70">
-            Konsultasikan jadwal dan pilihan paket umroh Anda langsung dengan
-            admin kami.
-          </p>
-          <a
-            href={whatsappUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 rounded-full bg-gold px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#c68a1e]"
-          >
-            <MessageCircle size={16} aria-hidden="true" />
-            Konsultasi via WhatsApp
-          </a>
+          <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-5">
+            <p className="text-sm font-semibold text-white">Siap Berangkat?</p>
+            <p className="mt-1.5 text-xs leading-relaxed text-white/60">
+              Konsultasikan jadwal dan pilihan paket langsung dengan admin kami.
+            </p>
+            <a
+              href={whatsappUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-shine mt-4 flex items-center justify-center gap-2 rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#c68a1e]"
+            >
+              <MessageCircle size={15} aria-hidden="true" />
+              Konsultasi Sekarang
+            </a>
+          </div>
         </div>
       </div>
 
+      {/* Bottom bar */}
       <div className="border-t border-white/10">
-        <div className="container-site flex flex-col items-center justify-between gap-2 py-5 text-xs text-white/60 sm:flex-row">
+        <div className="container-site flex flex-col items-center justify-between gap-2 py-5 text-xs text-white/40 sm:flex-row">
           <p>{SITE.copyright}</p>
-          <p>{SITE.subBrand}</p>
+          <p>{SITE.legalName} · {SITE.subBrand}</p>
         </div>
       </div>
     </footer>

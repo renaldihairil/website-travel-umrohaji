@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/ui/Reveal";
 import { CtaBand } from "@/components/home/CtaBand";
 import { PackageGallery } from "@/components/packages/PackageGallery";
 import { PackageTabs } from "@/components/packages/PackageTabs";
@@ -28,13 +29,10 @@ export function generateStaticParams() {
   return PACKAGES.map((pkg) => ({ slug: pkg.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: DetailPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: DetailPageProps): Promise<Metadata> {
   const { slug } = await params;
   const pkg = getPackageBySlug(slug);
   if (!pkg) return { title: "Paket Tidak Ditemukan" };
-
   return {
     title: pkg.name,
     description: `${pkg.name} — ${pkg.duration}, ${pkg.hotel}. ${pkg.price}. ${pkg.description}`,
@@ -61,111 +59,128 @@ export default async function PaketDetailPage({ params }: DetailPageProps) {
       {/* Breadcrumb */}
       <nav
         aria-label="Breadcrumb"
-        className="container-site pt-8 text-sm text-muted"
+        className="border-b border-line bg-white"
       >
-        <ol className="flex flex-wrap items-center gap-1.5">
-          <li>
-            <Link href="/" className="hover:text-primary">
-              Beranda
-            </Link>
-          </li>
-          <li aria-hidden="true">
-            <ChevronRight size={14} />
-          </li>
-          <li>
-            <Link href="/paket-umroh" className="hover:text-primary">
-              Paket Umroh
-            </Link>
-          </li>
-          <li aria-hidden="true">
-            <ChevronRight size={14} />
-          </li>
-          <li aria-current="page" className="text-primary-dark">
-            {pkg.name}
-          </li>
-        </ol>
+        <div className="container-site flex items-center overflow-x-auto py-3.5 text-sm text-muted">
+          <ol className="flex items-center gap-1.5 whitespace-nowrap">
+            <li><Link href="/" className="hover:text-primary">Beranda</Link></li>
+            <li aria-hidden="true"><ChevronRight size={14} /></li>
+            <li><Link href="/paket-umroh" className="hover:text-primary">Paket Umroh</Link></li>
+            <li aria-hidden="true"><ChevronRight size={14} /></li>
+            <li aria-current="page" className="font-medium text-primary-dark">{pkg.name}</li>
+          </ol>
+        </div>
       </nav>
 
-      <section className="container-site grid gap-10 py-8 lg:grid-cols-2 lg:gap-14 lg:py-12" aria-labelledby="detail-title">
-        {/* Gallery */}
-        <PackageGallery images={pkg.gallery} name={pkg.name} />
+      {/* ─── Main Detail ──────────────────────────────── */}
+      <section
+        className="container-site grid gap-10 py-10 lg:grid-cols-2 lg:gap-16 lg:py-14"
+        aria-labelledby="detail-title"
+      >
+        {/* Galeri */}
+        <Reveal variant="left">
+          <PackageGallery images={pkg.gallery} name={pkg.name} />
+        </Reveal>
 
-        {/* Informasi paket */}
-        <div>
-          <Badge variant={pkg.badgeVariant}>{pkg.badge}</Badge>
-          <h1
-            id="detail-title"
-            className="mt-4 text-3xl font-bold sm:text-4xl"
-          >
-            {pkg.name}
-          </h1>
+        {/* Info paket */}
+        <Reveal variant="right">
+          <div>
+            {/* Badge + Judul */}
+            <Badge variant={pkg.badgeVariant}>{pkg.badge}</Badge>
+            <h1 id="detail-title" className="mt-3 font-display text-3xl font-bold sm:text-4xl">
+              {pkg.name}
+            </h1>
+            <span aria-hidden="true" className="gold-line mt-4 block w-20" />
 
-          <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted">
-            <span className="inline-flex items-center gap-1.5">
-              <CalendarDays size={16} aria-hidden="true" />
-              {pkg.duration}
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <MapPin size={16} aria-hidden="true" />
-              {pkg.route}
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <BedDouble size={16} aria-hidden="true" />
-              {pkg.hotel}
-            </span>
+            {/* Info pills */}
+            <div className="mt-5 flex flex-wrap gap-2">
+              {[
+                { icon: CalendarDays, text: pkg.duration },
+                { icon: MapPin,       text: pkg.route },
+                { icon: BedDouble,    text: pkg.hotel },
+              ].map(({ icon: Icon, text }) => (
+                <span
+                  key={text}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-line bg-white px-3.5 py-1.5 text-xs font-medium text-ink shadow-sm"
+                >
+                  <Icon size={13} className="text-gold" aria-hidden="true" />
+                  {text}
+                </span>
+              ))}
+            </div>
+
+            {/* Harga */}
+            <div className="price-badge mt-6">
+              <div>
+                <p className="text-xs font-medium text-muted">Harga Mulai</p>
+                <p className="font-display text-3xl font-bold text-primary-dark sm:text-4xl">
+                  {pkg.price}
+                </p>
+                {pkg.priceUnit ? (
+                  <p className="text-sm text-muted">{pkg.priceUnit}</p>
+                ) : null}
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              {pkg.cta.whatsapp ? (
+                <a
+                  href={tanyaPaketUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-shine inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-dark"
+                >
+                  <MessageCircle size={16} aria-hidden="true" />
+                  {pkg.cta.label} <span aria-hidden="true">→</span>
+                </a>
+              ) : (
+                <Button href={pkg.cta.href ?? "/pendaftaran"} className="btn-shine px-7 py-3.5">
+                  {pkg.cta.label} <span aria-hidden="true">→</span>
+                </Button>
+              )}
+              <a
+                href={tanyaPaketUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 px-7 py-3.5 text-sm font-semibold text-primary-dark transition-all duration-300 hover:-translate-y-0.5 hover:border-primary hover:bg-primary/5"
+              >
+                <MessageCircle size={16} aria-hidden="true" />
+                Tanya Paket
+              </a>
+            </div>
+
+            {/* Fasilitas */}
+            <div className="mt-7 rounded-2xl border border-line bg-background p-5">
+              <h2 className="mb-4 text-base font-bold text-primary-dark">
+                Fasilitas yang Didapatkan
+              </h2>
+              <ul className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                {pkg.facilities.map((facility, index) => {
+                  const Icon = facilityIcons[index % facilityIcons.length];
+                  return (
+                    <li key={facility} className="flex items-start gap-2.5 text-sm">
+                      <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
+                        <Icon size={13} aria-hidden="true" />
+                      </span>
+                      <span className="text-ink/85">{facility}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
-
-          <p className="mt-5 text-3xl font-bold text-primary-dark sm:text-4xl">
-            {pkg.price}{" "}
-            {pkg.priceUnit ? (
-              <span className="text-base font-medium text-muted">
-                {pkg.priceUnit}
-              </span>
-            ) : null}
-          </p>
-
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Button href={pkg.cta.href ?? "/pendaftaran"} className="px-7 py-3.5">
-              Daftar Sekarang <span aria-hidden="true">→</span>
-            </Button>
-            <a
-              href={tanyaPaketUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 px-7 py-3.5 text-sm font-semibold text-primary-dark transition-colors hover:border-primary hover:bg-primary/5"
-            >
-              <MessageCircle size={16} aria-hidden="true" />
-              Tanya Paket
-            </a>
-          </div>
-
-          <div className="mt-8 rounded-2xl border border-line bg-white p-6">
-            <h2 className="text-lg font-semibold">Fasilitas yang Didapatkan</h2>
-            <ul className="mt-4 space-y-3 text-sm text-ink/85">
-              {pkg.facilities.map((facility, index) => {
-                const Icon = facilityIcons[index % facilityIcons.length];
-                return (
-                  <li key={facility} className="flex items-start gap-3">
-                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gold-soft text-primary">
-                      <Icon size={15} aria-hidden="true" />
-                    </span>
-                    <span className="pt-1.5">{facility}</span>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </div>
+        </Reveal>
       </section>
 
-      {/* Tab konten */}
+      {/* ─── Tab Konten ───────────────────────────────── */}
       <section className="container-site pb-16 lg:pb-24">
         <PackageTabs pkg={pkg} />
       </section>
 
       <CtaBand
-        title={`Ambil ${pkg.name} Sekarang`}
-        description="Pendaftaran cepat melalui WhatsApp — kami bantu mulai dari konsultasi hingga keberangkatan."
+        title={`Ambil Paket ${pkg.name} Sekarang`}
+        description="Pendaftaran cepat melalui WhatsApp — kami bantu dari konsultasi hingga keberangkatan."
       />
     </>
   );

@@ -3,6 +3,7 @@ import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
 import { InquiryForm } from "@/components/registration/InquiryForm";
 import { CtaBand } from "@/components/home/CtaBand";
+import { Reveal } from "@/components/ui/Reveal";
 import {
   CONTACT,
   SITE,
@@ -31,9 +32,10 @@ export default function KontakPage() {
 
       <section className="container-site grid gap-8 py-12 lg:grid-cols-2 lg:py-16" aria-label="Informasi kontak">
         {/* Info kontak */}
-        <div>
+        <Reveal variant="left">
           <div className="card p-6 sm:p-8">
             <h2 className="text-xl font-semibold">Informasi Kontak</h2>
+            <span aria-hidden="true" className="gold-line mt-3 block w-20" />
 
             <div className="mt-6 flex items-center gap-4 rounded-2xl border border-line bg-background p-4">
               <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-primary text-white">
@@ -125,10 +127,12 @@ export default function KontakPage() {
               layanan akan dibalas segera pada jam berikutnya.
             </p>
           </div>
-        </div>
+        </Reveal>
 
         {/* Form inquiry */}
-        <InquiryForm />
+        <Reveal variant="right">
+          <InquiryForm />
+        </Reveal>
       </section>
 
       <CtaBand />

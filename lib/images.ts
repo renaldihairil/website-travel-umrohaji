@@ -1,22 +1,17 @@
 /**
  * Semua path gambar terpusat di sini.
- * Ganti nilai dengan asset final tanpa menyentuh component.
- * Placeholder saat ini berupa SVG lokal di /public/images (aman lisensi).
+ * Foto asli di-optimasi ke WebP oleh scripts/build-images.mjs
+ * (master tersimpan di assets/original/).
  */
 export const images = {
-  logo: "/images/logo.svg",
-  heroKabah: "/images/hero-kabah.svg",
-  kabah: "/images/kabah.svg",
-  masjidNabawi: "/images/masjid-nabawi.svg",
-  makkahSkyline: "/images/makkah-skyline.svg",
-  masjidInterior: "/images/masjid-interior.svg",
-  madinah: "/images/madinah.svg",
-  domes: "/images/domes.svg",
-  courtyard: "/images/courtyard.svg",
-  jamaah: "/images/jamaah.svg",
-  pembimbing: "/images/pembimbing.svg",
-  hotel: "/images/hotel.svg",
-  keberangkatan: "/images/keberangkatan.svg",
+  logo: "/images/logo-nurul-iman.png",
+  heroKabah: "/images/hero-kabah.webp",
+  kabahBlue: "/images/kabah-blue.webp",
+  kabahAerial: "/images/kabah-aerial.webp",
+  nabawiDay: "/images/nabawi-day.webp",
+  nabawiSunset: "/images/nabawi-sunset.webp",
+  makkahDusk: "/images/makkah-dusk.webp",
+  arafat: "/images/arafat.webp",
 } as const;
 
 export type ImageKey = keyof typeof images;

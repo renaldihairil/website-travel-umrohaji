@@ -14,7 +14,7 @@ export function Badge({ children, variant = "green", className = "" }: BadgeProp
 
   return (
     <span
-      className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${styles} ${className}`}
+      className={`pkg-badge ${styles} ${className}`}
     >
       {children}
     </span>
