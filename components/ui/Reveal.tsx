@@ -51,12 +51,12 @@ export function Reveal({
       return;
     }
 
-    let timer: ReturnType<typeof window.setInterval> | null = null;
+    let timer: ReturnType<typeof setInterval> | null = null;
 
     const cleanup = () => {
       observer.disconnect();
       if (timer !== null) {
-        window.clearInterval(timer);
+        clearInterval(timer);
         timer = null;
       }
       window.removeEventListener("scroll", onScroll);
@@ -88,7 +88,7 @@ export function Reveal({
     window.addEventListener("resize", onScroll);
 
     // Jaring pengaman bila event rendering tertunda
-    timer = window.setInterval(onScroll, 400);
+    timer = setInterval(onScroll, 400);
 
     return cleanup;
   }, []);
